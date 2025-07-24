@@ -1,0 +1,20 @@
+from flask import Flask, render_template, request, redirect, flash
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # for flashing messages
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/contact', methods=['POST'])
+def contact():
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+    # You can store this data or send via email
+    flash('Thank you for your message!')
+    return redirect('/')
+
+if __name__ == '__main__':
+    app.run(debug=True)
